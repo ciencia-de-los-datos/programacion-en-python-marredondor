@@ -16,7 +16,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 def pregunta_01():
     
     #path_destination = 'https://github.com/ciencia-de-los-datos/programacion-en-python-marredondor/blob/main/data.csv'
-    with open( data.csv , "r") as file:
+    with open( 'data.csv' , "r") as file:
         data = file.readlines()
         
     data = [row.replace("\n", "") for row in data]
