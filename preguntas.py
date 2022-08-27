@@ -36,6 +36,7 @@ def pregunta_01():
 
 
 def pregunta_02():
+    from collections import Counter
     with open( 'data.csv' , "r") as file:
         data = file.readlines()
         
