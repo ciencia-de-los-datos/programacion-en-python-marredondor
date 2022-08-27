@@ -15,7 +15,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 def pregunta_01():
     
-    #path_destination = 'https://github.com/ciencia-de-los-datos/programacion-en-python-marredondor/blob/main/data.csv'
     with open( 'data.csv' , "r") as file:
         data = file.readlines()
         
@@ -37,6 +36,17 @@ def pregunta_01():
 
 
 def pregunta_02():
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[0] for row in data]
+    d1 = Counter(data)
+    respuesta = list(d1.items())
+    respuesta.sort(reverse = False) 
+    
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
@@ -51,8 +61,7 @@ def pregunta_02():
     ]
 
     """
-    return
-
+    return respuesta
 
 def pregunta_03():
     """
