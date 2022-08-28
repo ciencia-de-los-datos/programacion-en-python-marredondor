@@ -65,6 +65,24 @@ def pregunta_02():
     return respuesta
 
 def pregunta_03():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[0:2] for row in data]
+    tupla = tuple(data)
+    counter = {}
+    for key, value in tupla:
+        if key in counter:
+            counter[key] += int(value)
+        else:
+            counter[key] = int(value)
+    respuesta = list(counter.items())
+    respuesta.sort(reverse = False)
+
     """
     Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
     de tuplas (letra, suma) ordendas alfabeticamente.
@@ -79,7 +97,7 @@ def pregunta_03():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_04():
