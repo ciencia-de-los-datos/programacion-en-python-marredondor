@@ -188,11 +188,8 @@ def pregunta_06():
 
 
 def pregunta_07():
-    
     with open( 'data.csv' , "r") as file:
         data = file.readlines()
-        
-    data = data_original.copy()
     data = [row.replace("\n", "") for row in data]
     data = [row.replace("\t", ",") for row in data]
     data = [row.split(",") for row in data]
