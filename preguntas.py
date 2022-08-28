@@ -101,6 +101,20 @@ def pregunta_03():
 
 
 def pregunta_04():
+    from collections import Counter    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[2] for row in data]
+    data = [row.split("-") for row in data]
+    data = [row[1] for row in data] 
+    d1 = Counter(data)
+    respuesta = list(d1.items())
+    respuesta.sort(reverse = False)
+
     """
     La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
     registros por cada mes, tal como se muestra a continuación.
@@ -122,7 +136,7 @@ def pregunta_04():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_05():
