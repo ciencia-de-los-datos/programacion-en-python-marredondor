@@ -73,14 +73,8 @@ def pregunta_03():
     data = [row.replace("\t", ",") for row in data]
     data = [row.split(",") for row in data]
     data = [row[0:2] for row in data]
-    tupla = tuple(data)
-    counter = {}
-    for key, value in tupla:
-        if key in counter:
-            counter[key] += int(value)
-        else:
-            counter[key] = int(value)
-    respuesta = list(counter.items())
+    data = [(row[0], int(row[1])) for row in data] 
+    respuesta =[(k, sum([y for (x,y) in data if x == k])) for k in dict(data).keys()]
     respuesta.sort(reverse = False)
 
     """
@@ -140,6 +134,17 @@ def pregunta_04():
 
 
 def pregunta_05():
+    from collections import Counter    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()  
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[0:2] for row in data]
+    data = [(row[0], int(row[1])) for row in data] 
+    respuesta =[(k, max([y for (x,y) in data if x == k]), min([y for (x,y) in data if x == k])) for k in dict(data).keys()]
+    respuesta.sort(reverse = False)    
+    
     """
     Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
     letra de la columa 1.
@@ -154,7 +159,7 @@ def pregunta_05():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_06():
