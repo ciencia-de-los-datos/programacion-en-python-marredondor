@@ -188,6 +188,27 @@ def pregunta_06():
 
 
 def pregunta_07():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = data_original.copy()
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[0:2] for row in data]
+    data = [(int(row[1]), row[0]) for row in data] 
+    
+    counter = {}
+    for key, value in data:
+        if key in counter:       
+            counter[key] += [value]
+        else:
+            counter[key] = [value]
+    
+    respuesta = [(key, counter[key]) for key in counter]
+    respuesta.sort(reverse = False)
+    
     """
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
     valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
@@ -208,7 +229,7 @@ def pregunta_07():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_08():
