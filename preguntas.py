@@ -230,6 +230,27 @@ def pregunta_07():
 
 
 def pregunta_08():
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]   
+    data = [row[0:2] for row in data]
+    data = [(int(row[1]), row[0]) for row in data] 
+    
+    counter = {}
+    for key, value in data:
+        if key in counter:       
+            counter[key] += [value]
+        else:
+            counter[key] = [value]
+    
+    respuesta = [(key, counter[key]) for key in counter]
+    respuesta = [(row[0], list(set(row[1]))) for row in respuesta] 
+    respuesta = [(row[0], sorted(row[1])) for row in respuesta]     
+    respuesta.sort(reverse = False)
+    
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
     de la segunda columna; la segunda parte de la tupla es una lista con las letras
@@ -251,7 +272,7 @@ def pregunta_08():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_09():
