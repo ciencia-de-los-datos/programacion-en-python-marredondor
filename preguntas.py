@@ -276,6 +276,42 @@ def pregunta_08():
 
 
 def pregunta_09():
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[3:] for row in data]
+    
+    new_data = []
+    for index, element in enumerate (data):
+        lista = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista.append(fila)
+        new_data.append(lista)
+                
+    lista = []
+    for index, element in enumerate (new_data):
+        lista.extend(element)
+    
+    lista = [row.replace(":", ",") for row in lista]    
+    lista = [row.split(',') for row in lista]  
+    lista = [(row[0], (int(row[1]))) for row in lista] 
+
+    counter = {}
+    for key, value in lista:
+        if key in counter:       
+            counter[key] += 1
+        else:
+            counter[key] = 1
+
+    respuesta = list(counter.items())
+    respuesta.sort(reverse = False)
+    respuesta = dict (respuesta)
+    
+    
     """
     Retorne un diccionario que contenga la cantidad de registros en que aparece cada
     clave de la columna 5.
@@ -295,7 +331,7 @@ def pregunta_09():
     }
 
     """
-    return
+    return respuesta
 
 
 def pregunta_10():
