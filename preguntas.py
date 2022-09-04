@@ -386,6 +386,40 @@ def pregunta_10():
 
 
 def pregunta_11():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()        
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    columna2 = [row[1] for row in data]  
+    data = [row[3:] for row in data]
+    
+    columna4 = []
+    for index, element in enumerate (data):
+        lista4 = []
+        for indice, fila in enumerate (element):
+            if len(fila) == 1:
+                lista4.append(fila)
+        columna4.append(lista4)
+    
+    lista = []
+    for index, element in enumerate (columna4):
+        lista.extend(element)
+    
+    clave = set(lista)
+    clave = sorted(clave)
+    
+    respuesta = {}
+    for ind_clave, elem_clave in enumerate (clave): 
+        for ind_c4, elem_c4 in enumerate(columna4):
+            if elem_clave in elem_c4:
+                if elem_clave in respuesta:
+                    respuesta[elem_clave] += int(columna2[ind_c4])
+                else: 
+                    respuesta[elem_clave] = int(columna2[ind_c4])
+
     """
     Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
     columna 4, ordenadas alfabeticamente.
@@ -403,7 +437,7 @@ def pregunta_11():
 
 
     """
-    return
+    return respuesta
 
 
 def pregunta_12():
