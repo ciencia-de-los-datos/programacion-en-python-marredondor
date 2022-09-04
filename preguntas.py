@@ -335,6 +335,36 @@ def pregunta_09():
 
 
 def pregunta_10():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    columna1 = [row[0] for row in data]  
+    data = [row[3:] for row in data]
+    
+    columna4 = []
+    columna5 = []
+    for index, element in enumerate (data):
+        lista4 = []
+        lista5 = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista5.append(fila)
+            if len(fila) == 1:
+                lista4.append(fila)
+        columna4.append(lista4)
+        columna5.append(lista5)
+    
+    columna4 = [len(row) for row in columna4]  
+    columna5 = [len(row) for row in columna5]  
+    
+    respuesta =[]
+    for index, element in enumerate (columna1):
+        respuesta.append((str(element), columna4[index], columna5[index]))
+        
     """
     Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
     cantidad de elementos de las columnas 4 y 5.
@@ -352,7 +382,7 @@ def pregunta_10():
 
 
     """
-    return
+    return respuesta
 
 
 def pregunta_11():
