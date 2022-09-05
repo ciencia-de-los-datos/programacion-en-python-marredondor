@@ -441,6 +441,46 @@ def pregunta_11():
 
 
 def pregunta_12():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()    
+    
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    columna1= [row[0] for row in data]  
+    data = [row[3:] for row in data]
+    
+    columna5 = []
+    for index, element in enumerate (data):
+        lista5 = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista5.append(fila)
+        columna5.append(lista5)
+    
+    #columna5 = [[e[:3] for e in row] for row in columna5]
+    
+    count_column5 = [[int(e[4:]) for e in row] for row in columna5]
+    count_column5 = [sum(row) for row in count_column5] 
+    
+    lista =[]
+    for index, element in enumerate (columna1):
+        lista.append((str(element), count_column5[index]))
+                   
+    respuesta = {}
+    for key, value in lista:
+        if key in respuesta:       
+            respuesta[key] += value
+        else:
+            respuesta[key] = value        
+        
+    respuesta = list(respuesta.items())
+    respuesta.sort(reverse = False)
+    respuesta = dict (respuesta)
+    
+    
+    
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
     los valores de la columna 5 sobre todo el archivo.
@@ -455,4 +495,4 @@ def pregunta_12():
     }
 
     """
-    return
+    return respuesta
