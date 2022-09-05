@@ -163,6 +163,31 @@ def pregunta_05():
 
 
 def pregunta_06():
+    
+    with open( 'data.csv' , "r") as file:
+        data = file.readlines()
+        
+    data = [row.replace("\n", "") for row in data]
+    data = [row.replace("\t", ",") for row in data]
+    data = [row.split(",") for row in data]
+    data = [row[3:] for row in data]
+    
+    columna5 = []
+    for index, element in enumerate (data):
+        lista5 = []
+        for indice, fila in enumerate (element):
+            if len(fila) > 1:
+                lista5.append(fila)
+        columna5.append(lista5)
+    
+    lista = []
+    for index, element in enumerate (columna5):
+        lista.extend(element)
+    
+    lista = [(row[:3], int(row[4:])) for row in lista]
+    respuesta =[(k, min([y for (x,y) in lista if x == k]), max([y for (x,y) in lista if x == k])) for k in dict(lista).keys()]
+    respuesta.sort(reverse = False)   
+    
     """
     La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
     una clave y el valor despues del caracter `:` corresponde al valor asociado a la
@@ -184,7 +209,7 @@ def pregunta_06():
     ]
 
     """
-    return
+    return respuesta
 
 
 def pregunta_07():
